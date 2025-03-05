@@ -1,57 +1,66 @@
 class AweSomeSlider {
-    constructor(container, { 
-        autoplay = false,            // No autoplay by default
-        interval = 3000,            // 3-second interval if autoplay is enabled
-        infinite = false,           // No infinite looping by default
-        arrows = false,             // No navigation arrows by default
-        pagination = false,         // No pagination by default
-        paginationText = [],        // Empty array, uses numeric pagination if enabled
-        type = 'slide',             // Slide transition by default
-        slidesPerView = 1,          // 1 slide visible by default
-        slidesToScroll = 1,         // Scroll 1 slide at a time by default
-        breakpoints = {}            // No responsive breakpoints by default
-    } = {}) {
+    constructor(container, options = {}) {
         this.container = document.querySelector(container);
         if (!this.container) throw new Error(`Container ${container} not found`);
         
         this.slider = this.container.querySelector('.awe-slider');
         if (!this.slider) throw new Error('Slider element not found');
         
-        this.slides = [...this.slider.children];
-        this.paginationContainer = this.container.querySelector('.awe-pagination');
-        this.prevBtn = this.container.querySelector('.awe-prev');
-        this.nextBtn = this.container.querySelector('.awe-next');
-        this.defaultOptions = {
-            autoplay,
-            interval,
-            infinite,
-            arrows,
-            pagination,
-            paginationText,
-            type,
-            slidesPerView: type === 'fade' ? 1 : slidesPerView, // Still overrides for fade
-            slidesToScroll
+        const init = () => {
+            this.slides = [...this.slider.children];
+            this.paginationContainer = this.container.querySelector('.awe-pagination');
+            this.prevBtn = this.container.querySelector('.awe-prev');
+            this.nextBtn = this.container.querySelector('.awe-next');
+            const { 
+                autoplay = false, 
+                interval = 3000, 
+                infinite = false, 
+                arrows = false, 
+                pagination = false,
+                paginationText = [], 
+                type = 'slide',
+                slidesPerView = 1,
+                slidesToScroll = 1,
+                breakpoints = {}
+            } = options;
+            this.defaultOptions = {
+                autoplay,
+                interval,
+                infinite,
+                arrows,
+                pagination,
+                paginationText,
+                type,
+                slidesPerView: type === 'fade' ? 1 : slidesPerView,
+                slidesToScroll
+            };
+            this.breakpoints = breakpoints;
+            this.gap = 14;
+            this.isDragging = false;
+            this.startPos = 0;
+            this.currentTranslate = 0;
+            this.prevTranslate = 0;
+            this.index = this.infinite && this.type === 'slide' ? this.slidesPerView : 0;
+
+            this.applyResponsiveSettings();
+            this.setupSlides();
+            if (this.type === 'slide' && this.infinite) this.cloneSlides();
+            if (this.type === 'fade') this.setupFade();
+            if (this.pagination && this.paginationContainer) this.createPagination();
+            if (this.arrows && this.prevBtn && this.nextBtn) this.addArrows();
+
+            this.updateSlideVisibility();
+            this.updatePagination();
+            this.startAutoplay();
+            this.addDragEvents();
+            window.addEventListener('resize', this.handleResize.bind(this));
         };
-        this.breakpoints = breakpoints;
-        this.gap = 14;
-        this.isDragging = false;
-        this.startPos = 0;
-        this.currentTranslate = 0;
-        this.prevTranslate = 0;
-        this.index = this.infinite && this.type === 'slide' ? this.slidesPerView : 0;
 
-        this.applyResponsiveSettings();
-        this.setupSlides();
-        if (this.type === 'slide' && this.infinite) this.cloneSlides();
-        if (this.type === 'fade') this.setupFade();
-        if (this.pagination && this.paginationContainer) this.createPagination();
-        if (this.arrows && this.prevBtn && this.nextBtn) this.addArrows();
-
-        this.updateSlideVisibility();
-        this.updatePagination();
-        this.startAutoplay();
-        this.addDragEvents();
-        window.addEventListener('resize', this.handleResize.bind(this));
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     }
 
     applyResponsiveSettings() {
@@ -94,8 +103,13 @@ class AweSomeSlider {
 
     setupSlides() {
         if (this.type === 'slide') {
+            const sliderWidth = this.slider.offsetWidth;
+            if (sliderWidth === 0) {
+                requestAnimationFrame(() => this.setupSlides());
+                return;
+            }
             const totalGapWidth = this.gap * (this.slidesPerView - 1);
-            const slideWidth = (this.slider.offsetWidth - totalGapWidth) / this.slidesPerView;
+            const slideWidth = (sliderWidth - totalGapWidth) / this.slidesPerView;
             this.slides.forEach(slide => {
                 slide.style.minWidth = `${slideWidth}px`;
                 slide.style.width = `${slideWidth}px`;
@@ -104,6 +118,7 @@ class AweSomeSlider {
     }
 
     cloneSlides() {
+        if (this.slides.length < this.slidesPerView) return;
         const clonesBefore = [];
         const clonesAfter = [];
         for (let i = 0; i < this.slidesPerView; i++) {
@@ -127,6 +142,7 @@ class AweSomeSlider {
             slide.style.height = '100%';
             slide.style.transition = 'opacity 0.5s ease-in-out';
             slide.style.opacity = i === this.index ? '1' : '0';
+            slide.style.zIndex = i === this.index ? 1 : 0;
         });
         this.slider.style.position = 'relative';
         this.slider.style.overflow = 'hidden';
@@ -169,9 +185,11 @@ class AweSomeSlider {
         this.slider.addEventListener('mousemove', this.drag.bind(this));
         this.slider.addEventListener('mouseup', this.stopDragging.bind(this));
         this.slider.addEventListener('mouseleave', this.stopDragging.bind(this));
-        this.slider.addEventListener('touchstart', this.startDragging.bind(this));
-        this.slider.addEventListener('touchmove', this.drag.bind(this));
+        
+        this.slider.addEventListener('touchstart', this.startDragging.bind(this), { passive: false });
+        this.slider.addEventListener('touchmove', this.drag.bind(this), { passive: false });
         this.slider.addEventListener('touchend', this.stopDragging.bind(this));
+        this.slider.addEventListener('touchcancel', this.stopDragging.bind(this));
     }
 
     startDragging(e) {
@@ -192,7 +210,9 @@ class AweSomeSlider {
         
         if (this.type === 'slide') {
             this.currentTranslate = this.prevTranslate + diff;
-            this.slider.style.transform = `translateX(${this.currentTranslate}px)`;
+            requestAnimationFrame(() => {
+                this.slider.style.transform = `translateX(${this.currentTranslate}px)`;
+            });
         }
     }
 
@@ -205,12 +225,12 @@ class AweSomeSlider {
             const slideWidthPx = (this.slider.offsetWidth - this.gap * (this.slidesPerView - 1)) / this.slidesPerView;
             const threshold = slideWidthPx / 2;
             
+            this.slider.style.transition = 'transform 0.5s ease-in-out';
             if (movedBy < -threshold) {
                 this.nextSlide();
             } else if (movedBy > threshold) {
                 this.prevSlide();
             } else {
-                this.slider.style.transition = 'transform 0.5s ease-in-out';
                 this.updateSlidePosition();
             }
         } else if (this.type === 'fade') {
@@ -223,7 +243,9 @@ class AweSomeSlider {
     }
 
     getPositionX(e) {
-        return e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        if (e.type.includes('mouse')) return e.pageX;
+        if (e.touches && e.touches.length > 0) return e.touches[0].pageX;
+        return 0;
     }
 
     updatePagination() {
@@ -272,6 +294,7 @@ class AweSomeSlider {
         if (this.type === 'fade') {
             this.slides.forEach((slide, i) => {
                 slide.style.opacity = i === this.index ? '1' : '0';
+                slide.style.zIndex = i === this.index ? 1 : 0;
             });
         } else {
             this.updateSlidePosition();
@@ -359,7 +382,7 @@ class AweSomeSlider {
     }
 }
 
-// Initialize the 8 main variations with breakpoints
+// Slider initializations (unchanged)
 new AweSomeSlider('#slider1', { 
     autoplay: false, 
     infinite: false, 
@@ -466,10 +489,10 @@ new AweSomeSlider('#slider8', {
     pagination: true, 
     paginationText: ['One', 'Two', 'Three', 'Four', 'Five'], 
     type: 'slide',
-    slidesPerView: 1,
+    slidesPerView: 2,
     slidesToScroll: 2,
     breakpoints: {
         768: { slidesToScroll: 1 },
-        1024: { slidesToScroll: 2, slidesPerView: 2 }
+        1024: { slidesToScroll: 3 }
     }
 });
