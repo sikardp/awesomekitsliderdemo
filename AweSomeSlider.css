@@ -143,3 +143,41 @@ hr {
         font-size: 24px;
     }
 }
+
+footer {
+    height: fit-content;
+    padding: 30px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary);
+
+    p {
+        width: fit-content;
+        height: fit-content;
+        margin: 0;
+        color: #fff;
+    }
+}
+
+@media (max-width: 768px) {
+    .sliders-main-container {
+        width: 98%;
+        margin: 50px auto 50px auto;
+    }
+    
+    .useage-main-container {
+        width: 98%;
+        margin: 50px auto 50px auto;
+    }
+    
+    .install-main-container {
+        width: 98%;
+        margin: 50px auto 50px auto;
+    }
+    
+    .properties-main-container {
+        width: 98%;
+        margin: 50px auto 50px auto;
+    }
+}

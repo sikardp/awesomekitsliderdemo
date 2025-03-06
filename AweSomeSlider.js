@@ -1,23 +1,43 @@
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("curentYear").textContent = new Date().getFullYear();
+})
+
 // Slider initializations (unchanged)
 new AweSomeSlider('#Basic', {
     arrows: true,
+    breakpoints: {
+        768: { slidesPerView: 1, slidesToScroll: 1 },
+        1024: { slidesPerView: 1, slidesToScroll: 1 }
+    }
 });
 
 new AweSomeSlider('#Autoplay', {
     arrows: true,
-    autoplay: true
+    autoplay: true,
+    breakpoints: {
+        768: { slidesPerView: 1, slidesToScroll: 1 },
+        1024: { slidesPerView: 1, slidesToScroll: 1 }
+    }
 });
 
 new AweSomeSlider('#Infinite', {
     arrows: true,
     autoplay: true,
-    infinite: true
+    infinite: true,
+    breakpoints: {
+        768: { slidesPerView: 1, slidesToScroll: 1 },
+        1024: { slidesPerView: 1, slidesToScroll: 1 }
+    }
 });
 
 new AweSomeSlider('#Pagination', {
     arrows: true,
     autoplay: true,
-    pagination: true
+    pagination: true,
+    breakpoints: {
+        768: { slidesPerView: 1, slidesToScroll: 1 },
+        1024: { slidesPerView: 1, slidesToScroll: 1 }
+    }
 });
 
 new AweSomeSlider('#customPagination', {
@@ -25,6 +45,10 @@ new AweSomeSlider('#customPagination', {
     autoplay: true,
     pagination: true,
     paginationText: ['One', 'Two', 'Three', 'Four', 'Five'],
+    breakpoints: {
+        768: { slidesPerView: 1, slidesToScroll: 1 },
+        1024: { slidesPerView: 1, slidesToScroll: 1 }
+    }
 });
 
 new AweSomeSlider('#sliderPerView', {
@@ -33,6 +57,10 @@ new AweSomeSlider('#sliderPerView', {
     infinite: true,
     slidesPerView: 3,
     slidesToScroll: 1,
+    breakpoints: {
+        768: { slidesPerView: 1, slidesToScroll: 1 },
+        1024: { slidesPerView: 1, slidesToScroll: 1 }
+    }
 });
 
 
