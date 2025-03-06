@@ -1,110 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="Home">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8 Main Slider Variations with Dragging, SlidesPerView, SlidesToScroll</title>
+    <title>AweSomeKit Slider</title>
+    <link rel="icon" type="image/png" href="FavIcon.PNG">
     <link rel="stylesheet" href="AweSomeSlider.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sikardp/AweSomeKitSlider/dist/AweSomeKitSlider.css"> -->
+    <link rel="stylesheet" href="node_modules/awesomekitslider/dist/AweSomekitSlider.min.css">
+    <!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
 </head>
 <body>
-    <!-- 1. Basic Slide: No Autoplay, No Infinite, No Arrows, No Pagination, Slide -->
-    <div class="awe-slider-container" id="slider1">
-        <div class="awe-slider">
-            <div class="awe-slide" style="background: #FF6F61;">Slide 1</div>
-            <div class="awe-slide" style="background: #6B5B95;">Slide 2</div>
-            <div class="awe-slide" style="background: #88B04B;">Slide 3</div>
-            <div class="awe-slide" style="background: #F7CAC9;">Slide 4</div>
-            <div class="awe-slide" style="background: #92A8D1;">Slide 5</div>
+    <header>
+        <div class="header-main-ele-con">
+            <a href="#Home" class="logo-con"><img src="Logo.jpg" alt="" class="logo"></a>
+            <div class="menu-items">
+                <a href="#Demo">Demo</a>
+                <a href="#Usage">Usage</a>
+                <a href="#Properties">Properties</a>
+                <a href="#Install">Install</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="sliders-main-container" id="Demo">
+        <h1 class="slider-heading">Basic Slider</h1>
+        <div class="awe-slider-container" id="Basic">
+            <button class="awe-btn awe-prev">❮</button>
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #FF6F61;">Slide 1</div>
+                <div class="awe-slide" style="background: #6B5B95;">Slide 2</div>
+                <div class="awe-slide" style="background: #88B04B;">Slide 3</div>
+                <div class="awe-slide" style="background: #F7CAC9;">Slide 4</div>
+                <div class="awe-slide" style="background: #92A8D1;">Slide 5</div>
+            </div>
+            <button class="awe-btn awe-next">❯</button>
+        </div>      
+
+        <pre>
+            <code class="language-js">
+                new AweSomeSlider('#Basic', {
+                    arrows: true,
+                });
+            </code>
+        </pre>
+        
+
+        <!-- 1. Basic Slide: No Autoplay, No Infinite, No Arrows, No Pagination, Slide -->
+        <div class="awe-slider-container" id="slider1">
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #FF6F61;">Slide 1</div>
+                <div class="awe-slide" style="background: #6B5B95;">Slide 2</div>
+                <div class="awe-slide" style="background: #88B04B;">Slide 3</div>
+                <div class="awe-slide" style="background: #F7CAC9;">Slide 4</div>
+                <div class="awe-slide" style="background: #92A8D1;">Slide 5</div>
+            </div>
+        </div>
+
+        <!-- 2. Basic Fade: No Autoplay, No Infinite, No Arrows, No Pagination, Fade -->
+        <div class="awe-slider-container" id="slider2">
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #D4A5A5;">Slide 1</div>
+                <div class="awe-slide" style="background: #9B59B6;">Slide 2</div>
+                <div class="awe-slide" style="background: #3498DB;">Slide 3</div>
+                <div class="awe-slide" style="background: #E67E22;">Slide 4</div>
+                <div class="awe-slide" style="background: #2ECC71;">Slide 5</div>
+            </div>
+        </div>
+
+        <!-- 3. Interactive Slide: No Autoplay, Infinite, Arrows, No Pagination, Slide -->
+        <div class="awe-slider-container" id="slider3">
+            <button class="awe-btn awe-prev">❮</button>
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #F1C40F;">Slide 1</div>
+                <div class="awe-slide" style="background: #E74C3C;">Slide 2</div>
+                <div class="awe-slide" style="background: #1ABC9C;">Slide 3</div>
+                <div class="awe-slide" style="background: #8E44AD;">Slide 4</div>
+                <div class="awe-slide" style="background: #34495E;">Slide 5</div>
+            </div>
+            <button class="awe-btn awe-next">❯</button>
+        </div>
+
+        <!-- 4. Interactive Fade: No Autoplay, Infinite, Arrows, No Pagination, Fade -->
+        <div class="awe-slider-container" id="slider4">
+            <button class="awe-btn awe-prev">❮</button>
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #ECF0F1;">Slide 1</div>
+                <div class="awe-slide" style="background: #95A5A6;">Slide 2</div>
+                <div class="awe-slide" style="background: #D35400;">Slide 3</div>
+                <div class="awe-slide" style="background: #BDC3C7;">Slide 4</div>
+                <div class="awe-slide" style="background: #7F8C8D;">Slide 5</div>
+            </div>
+            <button class="awe-btn awe-next">❯</button>
+        </div>
+
+        <!-- 5. Autoplay Slide: Autoplay, Infinite, No Arrows, No Pagination, Slide -->
+        <div class="awe-slider-container" id="slider5">
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #16A085;">Slide 1</div>
+                <div class="awe-slide" style="background: #27AE60;">Slide 2</div>
+                <div class="awe-slide" style="background: #2980B9;">Slide 3</div>
+                <div class="awe-slide" style="background: #8E44AD;">Slide 4</div>
+                <div class="awe-slide" style="background: #2C3E50;">Slide 5</div>
+            </div>
+        </div>
+
+        <!-- 6. Autoplay Fade: Autoplay, Infinite, No Arrows, No Pagination, Fade -->
+        <div class="awe-slider-container" id="slider6">
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #F39C12;">Slide 1</div>
+                <div class="awe-slide" style="background: #E74C3C;">Slide 2</div>
+                <div class="awe-slide" style="background: #9B59B6;">Slide 3</div>
+                <div class="awe-slide" style="background: #FB6964;">Slide 4</div>
+                <div class="awe-slide" style="background: #77B1A9;">Slide 5</div>
+            </div>
+        </div>
+
+        <!-- 7. Full Slide: Autoplay, Infinite, Arrows, Pagination, Slide -->
+        <div class="awe-slider-container" id="slider7">
+            <button class="awe-btn awe-prev">❮</button>
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #B9770E;">Slide 1</div>
+                <div class="awe-slide" style="background: #D7DBDD;">Slide 2</div>
+                <div class="awe-slide" style="background: #5DADE2;">Slide 3</div>
+                <div class="awe-slide" style="background: #52BE80;">Slide 4</div>
+                <div class="awe-slide" style="background: #AF7AC5;">Slide 5</div>
+            </div>
+            <button class="awe-btn awe-next">❯</button>
+            <div class="awe-pagination-wrapper"><div class="awe-pagination"></div></div>
+        </div>
+
+        <!-- 8. Full Fade: Autoplay, Infinite, Arrows, Pagination, Fade -->
+        <div class="awe-slider-container" id="slider8">
+            <button class="awe-btn awe-prev">❮</button>
+            <div class="awe-slider">
+                <div class="awe-slide" style="background: #F1948A;">Slide 1</div>
+                <div class="awe-slide" style="background: #5499C7;">Slide 2</div>
+                <div class="awe-slide" style="background: #48C9B0;">Slide 3</div>
+                <div class="awe-slide" style="background: #F4D03F;">Slide 4</div>
+                <div class="awe-slide" style="background: #EB984E;">Slide 5</div>
+            </div>
+            <button class="awe-btn awe-next">❯</button>
+            <div class="awe-pagination-wrapper"><div class="awe-pagination"></div></div>
         </div>
     </div>
 
-    <!-- 2. Basic Fade: No Autoplay, No Infinite, No Arrows, No Pagination, Fade -->
-    <div class="awe-slider-container" id="slider2">
-        <div class="awe-slider">
-            <div class="awe-slide" style="background: #D4A5A5;">Slide 1</div>
-            <div class="awe-slide" style="background: #9B59B6;">Slide 2</div>
-            <div class="awe-slide" style="background: #3498DB;">Slide 3</div>
-            <div class="awe-slide" style="background: #E67E22;">Slide 4</div>
-            <div class="awe-slide" style="background: #2ECC71;">Slide 5</div>
-        </div>
+    <div class="install-main-container" id="Install">
+        <h1 class="slider-heading">Installation</h1>
+        <p class="slider-subheading">Using CDN</p>
+        <p class="slider-desc">Include the following link in your HTML file to use AweSomeSlider without downloading</p>
+        <pre>
+            <code class="language-html">
+                &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sikardp/AweSomeKitSlider/dist/AweSomeKitSlider.min.css"&gt;
+                &lt;script src="https://cdn.jsdelivr.net/gh/sikardp/AweSomeKitSlider/dist/AwesomeKitSlider.min.js"&gt;&lt;/script&gt;
+            </code>
+        </pre>
+            
+
+        <p class="slider-subheading">Using NPM</p>
+        <p class="slider-desc">Install via npm for easy integration into your project</p>
+        <pre>
+            <code class="language-html">
+                npm i awesomekitslider
+            </code>
+        </pre>
+
+        <p>Then, import it into your JavaScript file</p>
+        <pre>
+            <code class="language-html">
+                import 'awesomekitslider/dist/AweSomeKitSlider.min.css';
+                import AweSomeSlider from 'awesomekitslider';
+            </code>
+        </pre>
+            
+            
     </div>
 
-    <!-- 3. Interactive Slide: No Autoplay, Infinite, Arrows, No Pagination, Slide -->
-    <div class="awe-slider-container" id="slider3">
-        <button class="awe-btn awe-prev">❮</button>
-        <div class="awe-slider">
-            <div class="awe-slide" style="background: #F1C40F;">Slide 1</div>
-            <div class="awe-slide" style="background: #E74C3C;">Slide 2</div>
-            <div class="awe-slide" style="background: #1ABC9C;">Slide 3</div>
-            <div class="awe-slide" style="background: #8E44AD;">Slide 4</div>
-            <div class="awe-slide" style="background: #34495E;">Slide 5</div>
-        </div>
-        <button class="awe-btn awe-next">❯</button>
+    <div class="useage-main-container" id="Usage">
+        <h1 class="slider-heading">Usage</h1>
+        <p class="slider-subheading">1. HTML Markup</p>
+        <p class="slider-desc">Start by adding the basic structure for your slider in your HTML file</p>
+        <pre>
+            <code class="language-html">
+                &lt;div class="awe-slider-container" id="Basic"&gt;
+                    &lt;button class="awe-btn awe-prev"&gt;❮&lt;/button&gt;
+                    &lt;div class="awe-slider"&gt;
+                        &lt;div class="awe-slide" style="background: #FF6F61;"&gt;Slide 1&lt;/div&gt;
+                        &lt;div class="awe-slide" style="background: #6B5B95;"&gt;Slide 2&lt;/div&gt;
+                        &lt;div class="awe-slide" style="background: #88B04B;"&gt;Slide 3&lt;/div&gt;
+                        &lt;div class="awe-slide" style="background: #F7CAC9;"&gt;Slide 4&lt;/div&gt;
+                        &lt;div class="awe-slide" style="background: #92A8D1;"&gt;Slide 5&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;button class="awe-btn awe-next"&gt;❯&lt;/button&gt;
+                &lt;/div&gt;
+            </code>
+        </pre>
+
+        <p class="slider-subheading">2. Initializing the Slider</p>
+        <p class="slider-desc">Once the HTML structure is in place, initialize the slider using JavaScript</p>
+        <pre>
+            <code class="language-js">
+                new AweSomeSlider('#Basic', {
+                    arrows: true,
+                });
+            </code>
+        </pre>
+
+        <p class="slider-subheading">3. Full Example</p>
+        <p class="slider-desc">Here’s the complete implementation, including styles and script</p>
+        <pre class="language-html">
+            <code>
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title&gt;AweSomeSlider Example&lt;/title&gt;
+                    &lt;link rel="stylesheet" href="awe-slider.css"&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+        
+                    &lt;div class="awe-slider-container" id="Basic"&gt;
+                        &lt;button class="awe-btn awe-prev"&gt;❮&lt;/button&gt;
+                        &lt;div class="awe-slider"&gt;
+                            &lt;div class="awe-slide" style="background: #FF6F61;"&gt;Slide 1&lt;/div&gt;
+                            &lt;div class="awe-slide" style="background: #6B5B95;"&gt;Slide 2&lt;/div&gt;
+                            &lt;div class="awe-slide" style="background: #88B04B;"&gt;Slide 3&lt;/div&gt;
+                            &lt;div class="awe-slide" style="background: #F7CAC9;"&gt;Slide 4&lt;/div&gt;
+                            &lt;div class="awe-slide" style="background: #92A8D1;"&gt;Slide 5&lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;button class="awe-btn awe-next"&gt;❯&lt;/button&gt;
+                    &lt;/div&gt;
+        
+                    &lt;script src="awe-slider.js"&gt;&lt;/script&gt;
+                    &lt;script&gt;
+                        new AweSomeSlider('#Basic', {
+                            arrows: true
+                        });
+                    &lt;/script&gt;
+        
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+        
+        
     </div>
 
-    <!-- 4. Interactive Fade: No Autoplay, Infinite, Arrows, No Pagination, Fade -->
-    <div class="awe-slider-container" id="slider4">
-        <button class="awe-btn awe-prev">❮</button>
-        <div class="awe-slider">
-            <div class="awe-slide" style="background: #ECF0F1;">Slide 1</div>
-            <div class="awe-slide" style="background: #95A5A6;">Slide 2</div>
-            <div class="awe-slide" style="background: #D35400;">Slide 3</div>
-            <div class="awe-slide" style="background: #BDC3C7;">Slide 4</div>
-            <div class="awe-slide" style="background: #7F8C8D;">Slide 5</div>
-        </div>
-        <button class="awe-btn awe-next">❯</button>
-    </div>
+    <div class="properties-main-container" id="Properties"></div>
 
-    <!-- 5. Autoplay Slide: Autoplay, Infinite, No Arrows, No Pagination, Slide -->
-    <div class="awe-slider-container" id="slider5">
-        <div class="awe-slider">
-            <div class="awe-slide" style="background: #16A085;">Slide 1</div>
-            <div class="awe-slide" style="background: #27AE60;">Slide 2</div>
-            <div class="awe-slide" style="background: #2980B9;">Slide 3</div>
-            <div class="awe-slide" style="background: #8E44AD;">Slide 4</div>
-            <div class="awe-slide" style="background: #2C3E50;">Slide 5</div>
-        </div>
-    </div>
+    
+    
 
-    <!-- 6. Autoplay Fade: Autoplay, Infinite, No Arrows, No Pagination, Fade -->
-    <div class="awe-slider-container" id="slider6">
-        <div class="awe-slider">
-            <div class="awe-slide" style="background: #F39C12;">Slide 1</div>
-            <div class="awe-slide" style="background: #E74C3C;">Slide 2</div>
-            <div class="awe-slide" style="background: #9B59B6;">Slide 3</div>
-            <div class="awe-slide" style="background: #FB6964;">Slide 4</div>
-            <div class="awe-slide" style="background: #77B1A9;">Slide 5</div>
-        </div>
-    </div>
-
-    <!-- 7. Full Slide: Autoplay, Infinite, Arrows, Pagination, Slide -->
-    <div class="awe-slider-container" id="slider7">
-        <button class="awe-btn awe-prev">❮</button>
-        <div class="awe-slider">
-            <div class="awe-slide" style="background: #B9770E;">Slide 1</div>
-            <div class="awe-slide" style="background: #D7DBDD;">Slide 2</div>
-            <div class="awe-slide" style="background: #5DADE2;">Slide 3</div>
-            <div class="awe-slide" style="background: #52BE80;">Slide 4</div>
-            <div class="awe-slide" style="background: #AF7AC5;">Slide 5</div>
-        </div>
-        <button class="awe-btn awe-next">❯</button>
-        <div class="awe-pagination-wrapper"><div class="awe-pagination"></div></div>
-    </div>
-
-    <!-- 8. Full Fade: Autoplay, Infinite, Arrows, Pagination, Fade -->
-    <div class="awe-slider-container" id="slider8">
-        <button class="awe-btn awe-prev">❮</button>
-        <div class="awe-slider">
-            <div class="awe-slide" style="background: #F1948A;">Slide 1</div>
-            <div class="awe-slide" style="background: #5499C7;">Slide 2</div>
-            <div class="awe-slide" style="background: #48C9B0;">Slide 3</div>
-            <div class="awe-slide" style="background: #F4D03F;">Slide 4</div>
-            <div class="awe-slide" style="background: #EB984E;">Slide 5</div>
-        </div>
-        <button class="awe-btn awe-next">❯</button>
-        <div class="awe-pagination-wrapper"><div class="awe-pagination"></div></div>
-    </div>
-
+    <!-- <script src="https://cdn.jsdelivr.net/gh/sikardp/AweSomeKitSlider/dist/AwesomeKitSlider.js"></script> -->
+     <script src="node_modules/awesomekitslider/dist/AweSomeKitSlider.min.js"></script>
+     <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="AweSomeSlider.js"></script>
 </body>
 </html>
