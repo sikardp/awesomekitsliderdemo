@@ -84,6 +84,12 @@ header {
     }
 }
 
+hr {
+    color: var(--primary);
+    background: var(--primary);
+    margin-top: 60px;
+}
+
 .slider-heading {
     font-size: 34px;
     text-align: center;
